@@ -2,6 +2,47 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
+int main(int argc, char *argv[])
+{
+    int n; //购物车图书数量
+    int x; //包邮条件
+    int ans;
+    cin >> n >> x;
+    vector<int> Price((int)(3e5 + 1), 0);
+
+    for (int i = 1; i <= n; ++i)
+    {
+        int p; //价格
+        cin >> p;
+        for (int j = (int)3e5; j >=0 ; --j)
+        {
+            if (Price.at(j) == 1)
+            {
+                Price[j + p] = 1;
+            }
+        }
+        Price.at(p) = 1;
+    }
+
+    for (int i = x; i < (int)3e5; ++i)
+    {
+        if (Price.at(i) == 1)
+        {
+            ans = i;
+            break;
+        }
+    }
+
+    cout << ans;
+
+    return EXIT_SUCCESS;
+}
+
+/*
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
 vector<int> Sum(51);
 
 void DFS(const vector<int> price, int start, int sum, int x, int& ans)
@@ -57,3 +98,5 @@ int main(int argc, char* argv[])
 
     return EXIT_SUCCESS;
 }
+
+*/
